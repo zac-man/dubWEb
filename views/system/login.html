@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title><%= title %></title>
+
+	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen">
+	<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" media="screen">
+	<link rel="stylesheet" href="/assets/sbAdmin2/css/sb-admin-2.css" media="screen">
+
+	<!--<link rel="shortcut icon" href="imgs/favicon/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="imgs/favicon/favicon.ico" type="image/x-icon">-->
+</head>
+<body screen_capture_injected="true">
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">管理员后台</h3>
+				</div>
+				<div class="panel-body">
+					<form role="form">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="账号" id="username" type="text" autofocus />
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="密码" id="password" type="password" value="" />
+							</div>
+							<div class="form-group">
+								<button class="btn btn-lg btn-success btn-block" type="button" id="loginBtn">登录</button>
+							</div>
+							<div class="form-group">
+								<div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none" id ="errorMsg">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									<strong>登录信息有误</strong>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		document.onkeydown=function(e){
+			var keycode=document.all?event.keyCode:e.which;
+			if(keycode==13){
+				loginFun();
+			}
+		};
+		$("#loginBtn").click(function(){
+			loginFun();
+		});
+		function loginFun(){
+			var username = $("#username").val();
+			var password = $("#password").val();
+			var data = {"username":username,"password":password};
+			$.ajax({
+				url:'/admin/login',
+				type:'post',
+				data: data,
+				success: function(data,status){
+					console.log(data);
+					if(data.success){
+						location.href = '/admin/system';
+					}else{
+						$("#errorMsg").show();
+					}
+				},
+				error: function(data,status){
+					/*if(status == 'error'){
+					 location.href = 'login';
+					 }*/
+				}
+			});
+		}
+	});
+	</script>
+</body>
+</head>
+</html>
