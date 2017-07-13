@@ -93,13 +93,7 @@
                                         <div class="form-group col-md-12">
                                             <label for="dubType" class="col-md-2 control-label">样音类型:</label>
                                             <div class="col-md-8">
-                                                <select class="form-control" id="dubType" style="width: 500px;">
-                                                    <option value="专题配音" selected>专题配音</option>
-                                                    <option value="广告配音" >广告配音</option>
-                                                    <option value="飞碟说配音" >飞碟说配音</option>
-                                                    <option value="英语配音" >英语配音</option>
-                                                    <option value="游戏配音" >游戏配音</option>
-                                                </select>
+                                                <select class="form-control" id="dubType" style="width: 500px;"></select>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
@@ -151,6 +145,41 @@
 </div>
 <!-- /#wrapper -->
 
+<!--modal-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group col-md-12">
+                            <label for="dubType" class="col-md-3 control-label">样音类型:</label>
+                            <div class="col-md-8">
+                                <select class="form-control" id="editDubType"></select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="dubName" class="col-md-3 control-label">样音名:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="editDubName" placeholder="样音名">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--./modal-->
+
 
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -186,6 +215,16 @@
             //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
         }
 
+        var selectOption = ['专题配音','广告配音','飞碟说配音','游戏配音'];
+        init();
+        function init() {
+            $.each(selectOption, function(i, value) {
+                console.log(value);
+                var option = '<option value="'+value+'">'+value+'</option>';
+                $("#dubType").append(option);
+                $("#editDubType").append(option);
+            });
+        }
 
 
         var table = $('#dubListTable').DataTable( {
@@ -222,7 +261,12 @@
                 {
                     targets: 5,
                     render: function (data, type, row, meta) {
-                        return  '<button type="button" class="btn btn-xs btn-success btnAddProduct">修改</button><button type="button" class="btn btn-xs btn-danger btnAddProduct">删除</button>';
+
+                        var btnStr = '<div class="btn-group">';
+                            btnStr +='<button type="button" class="btn btn-xs btn-success editBtn">修改</button>';
+                            btnStr +='<button type="button" class="btn btn-xs btn-danger delBtn">修改</button>';
+                            btnStr +='</div>';
+                        return  btnStr
                     }
                 },
                 { "orderable": false, "targets":4 }
@@ -243,6 +287,17 @@
                         cell.innerHTML = i + 1;
                     });
                 }).draw();
+
+        table.on('click','.editBtn',function(){
+           var dubData = table.row($(this).parents('tr')).data();
+            $("#editModal").modal('show');
+            $("#editDubType").val(dubData.type);
+            $("#editDubName").val(dubData.name);
+
+        }).on('click','.delBtn',function(){
+            alert(22)
+        });
+
 
 
         $("#saveBtn").click(function(){
