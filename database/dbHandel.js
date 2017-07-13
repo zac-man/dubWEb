@@ -8,7 +8,6 @@ for(var m in models){
 
 module.exports = { 
 	getModel: function(type){
-		console.log("collection:"+type);
 		return _getModel(type);
 	}
 };

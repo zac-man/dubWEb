@@ -30,9 +30,9 @@ router.post("/login",function(req,res){    // 到达 /logout 路径则登出， 
 
 // 后台管理页面
 router.get('/system', function(req, res,next) {
-  /*  if(!req.session.user){ 					//到达/home路径首先判断是否已经登录
+    if(!req.session.user){ 					//到达/home路径首先判断是否已经登录
         res.redirect("/admin");				//未登录则重定向到 /login 路径
-    }*/
+    }
     res.render('system/system', { title: '系统管理' });
 });
 // 登出

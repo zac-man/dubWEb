@@ -10,8 +10,7 @@ var dubSchema = new Schema({
 
 
 var dubSchema = mongodb.mongoose.model("dubs", dubSchema);
-var dubDao = function () {
-};
+var dubDao = function () {};
 
 /*******
  保存
@@ -28,15 +27,26 @@ dubDao.prototype.save = function (obj, callback) {
  */
 dubDao.prototype.findAll = function (callback) {
     dubSchema.find(function (err, obj) {
-        callback(err,obj);
+        callback(err, obj);
     })
 };
+
 /**
- 按照电影名称精确查询
- **/
-dubDao.prototype.findByName = function (name, callback) {
-    dubSchema.findOne({name: name}, function (err, obj) {
-        //callback(err,obj);
+ *  更新数据
+ */
+
+dubDao.prototype.updateBy_id = function (data, callback) {
+    dubSchema.update({_id: data._id}, data, function (err, obj) {
+        callback(err, obj);
+    });
+};
+
+/**
+ * 删除
+ */
+dubDao.prototype.deleteBy_id = function (_id, callback) {
+    dubSchema.remove({_id: _id}, function (err) {
+        callback(err);
     });
 };
 
