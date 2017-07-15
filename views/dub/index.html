@@ -1,37 +1,109 @@
-
 <html lang="en">
 
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title><%= title %></title>
+    <title>滕州百灵文化传媒有限公司</title>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" media="screen">
-    <link rel="stylesheet" href="/assets/sbAdmin2/css/sb-admin-2.css" media="screen">
+    <link href="/assets/kefu/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/style.css" media="screen">
 
-    <!--<link rel="shortcut icon" href="imgs/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="imgs/favicon/favicon.ico" type="image/x-icon">-->
+    <link rel="shortcut icon" href="/imgs/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/imgs/favicon/favicon.ico" type="image/x-icon">
 </head>
-<body screen_capture_injected="true">
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">主页</h3>
-                </div>
-                <div class="panel-body">
-                </div>
-            </div>
+<body>
+<div class="col-width-1170">
+    <div class="header">
+        <img src="/imgs/logo.png" class="logo">
+        <div class="navHeader">
+            <ul class="nav">
+                <li class="active"><a href="#">主页</a></li>
+                <li><a href="#">在线试听</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">业务范畴</a></li>
+                <li><a href="#">合作流程</a></li>
+            </ul>
         </div>
     </div>
 </div>
 
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<div class="bannerDiv">
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="/imgs/banner/b1.png" alt="First slide">
+            </div>
+            <div class="item">
+                <img src="/imgs/banner/b2.png" alt="Second slide">
+            </div>
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" style="line-height: 300px;font-size: 100px;" href="#myCarousel"
+           data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" style="line-height: 300px;font-size: 100px;" href="#myCarousel"
+           data-slide="next">&rsaquo;</a>
+    </div>
+</div>
+<div class="col-width-1170">
+    <div class="col-md-12">
+        <p class="content-header">关于我们：</p>
+        <p class="content-span">
+            <b>滕州百灵文化传媒有限公司是</b>
+            一家面向全国以互联网为平台的专业配音服务机构，
+            我们的制作团体遍布全国，旗下拥有国内上百位优秀专业配音人员，能满足不同客户的各种需求。
+            拥有专业的录音棚，由拥有专业声学经验的录音师建声，并全程监督录音棚建设。得到了业内人士一致好评与认可!
+        </p>
+    </div>
+    <div class="col-md-12 margin-top-50">
+        <p class="content-header">主推样音：</p>
+    </div>
+</div>
+<div class="footer">
+
+</div>
+
+<!--qq聊天代码部分begin-->
+<div id="rightArrow"><a href="javascript:;" title="在线客户"></a></div>
+<div id="floatDivBoxs">
+    <div class="floatDtt">在线客服</div>
+    <div class="floatShadow">
+        <ul class="floatDqq">
+            <li style="padding-left:0px;">
+                <a target="_blank" href="tencent://message/?uin=1234567890&Site=sc.chinaz.com&Menu=yes">
+                    <img src="/assets/kefu/images/qq.png" align="absmiddle"> 客服:张三
+                </a>
+            </li>
+            <li style="padding-left:0px;">
+                <a target="_blank" href="tencent://message/?uin=1234567890&Site=sc.chinaz.com&Menu=yes">
+                    <img src="/assets/kefu/images/qq.png" align="absmiddle"> 客服:张三
+                </a>
+            </li>
+            <li style="padding-left:0px;">
+                <a target="_blank" href="tencent://message/?uin=1234567890&Site=sc.chinaz.com&Menu=yes">
+                    <img src="/assets/kefu/images/qq.png" align="absmiddle"> 客服:张三
+                </a>
+            </li>
+        </ul>
+        <div class="floatDtxt">热线电话</div>
+        <div class="floatDtel">
+            <p class="tel-num">010-123456789</p>
+            <p class="tel-num">010-123456789</p>
+        </div>
+    </div>
+    <a href="javascript:void(0)" class="btn_top" style="display: block;"></a>
+</div>
+<!--qq聊天代码部分end-->
+<script src="/bower_components/jquery/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-</script>
+<script src="/assets/main.js"></script>
+
 </body>
-</head>
 </html>
