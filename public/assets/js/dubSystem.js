@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     // bind to the form's submit event
     $('#frmUploader').submit(function () {
-        $("#btnSubmit").attr("disabled",true);
+        $("#btnSubmit").attr("disabled", true);
         $(this).ajaxSubmit(options);
         return false;
     });
@@ -18,42 +18,42 @@ $(document).ready(function () {
         // alert('Uploading is starting.');
         return true;
     }
+
     // post-submit callback
     function showResponse(responseText, statusText, xhr, $form) {
-        console.log(responseText);
-        $("#btnSubmit").attr("disabled",false);
+        $("#btnSubmit").attr("disabled", false);
         $("#dubUrl").show().text(responseText.files[0].filename);
         //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
     }
 
-    var selectOption = ['专题配音','广告配音','飞碟说配音','游戏配音'];
+    var selectOption = ['专题配音', '广告配音', '飞碟说配音', '游戏配音'];
     init();
     function init() {
-        $.each(selectOption, function(i, value) {
-            var option = '<option value="'+value+'">'+value+'</option>';
+        $.each(selectOption, function (i, value) {
+            var option = '<option value="' + value + '">' + value + '</option>';
             $("#dubType").append(option);
             $("#editDubType").append(option);
         });
     }
 
 
-    var table = $('#dubListTable').DataTable( {
+    var table = $('#dubListTable').DataTable({
         "ajax": {
-            "url":"/api/dubAll"
+            "url": "/api/dubAll"
         },
-        "searching":true,
+        "searching": true,
         "bLengthChange": true,
         "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "所有"]],
-        "iDisplayLength":20,
+        "iDisplayLength": 20,
         "columns": [
-            { "data": null},
-            { "data": "name"},
-            { "data": "type"},
-            { "data": null},
-            { "data": null},
-            { "data": null }
+            {"data": null},
+            {"data": "name"},
+            {"data": "type"},
+            {"data": null},
+            {"data": null},
+            {"data": null}
         ],
-        columnDefs:[
+        columnDefs: [
             {
                 "searchable": false,
                 "orderable": false,
@@ -64,7 +64,10 @@ $(document).ready(function () {
                 "orderable": false,
                 targets: 3,
                 render: function (data, type, row, meta) {
-                    return  '<audio class="audioEle" src="/upload/'+data.url+'" preload="auto" controls loop></audio>';
+                    return '<audio class="audioEle" src="/upload/' + data.url + '" preload="auto" controls loop>'
+                        + window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') +
+                        '/upload/' + data.url + '' +
+                        '</audio>';
                 }
             },
             {
@@ -78,48 +81,48 @@ $(document).ready(function () {
                 render: function (data, type, row, meta) {
 
                     var btnStr = '<div class="btn-group">';
-                    btnStr +='<button type="button" class="btn btn-xs btn-success editBtn">修改</button>';
-                    btnStr +='<button type="button" class="btn btn-xs btn-danger delBtn">删除</button>';
-                    btnStr +='<a href="/upload/'+data.url+'" download="" class="btn btn-xs btn-warning downloadBtn">下载</a>';
-                    btnStr +='</div>';
-                    return  btnStr
+                    btnStr += '<button type="button" class="btn btn-xs btn-success editBtn">修改</button>';
+                    btnStr += '<button type="button" class="btn btn-xs btn-danger delBtn">删除</button>';
+                    btnStr += '<a href="/upload/' + data.url + '" download="" class="btn btn-xs btn-warning downloadBtn">下载</a>';
+                    btnStr += '</div>';
+                    return btnStr
                 }
             },
-            { "orderable": false, "targets":4 }
+            {"orderable": false, "targets": 4}
         ],
         "order": [[1, 'asc']],
-        "fnPreDrawCallback": function( oSettings ) {
+        "fnPreDrawCallback": function (oSettings) {
         },
-        "initComplete": function(settings, json) {
-          $(".audioEle").audioPlayer();
+        "initComplete": function (settings, json) {
+            //$(".audioEle").audioPlayer();
         }
-    } );
+    });
     table.on('order.dt search.dt',
-        function() {
+        function () {
             table.column(0, {
                 search: 'applied',
                 order: 'applied'
-            }).nodes().each(function(cell, i) {
+            }).nodes().each(function (cell, i) {
                 cell.innerHTML = i + 1;
             });
         }).draw();
 
-    table.on('click','.editBtn',function(){
+    table.on('click', '.editBtn', function () {
         var dubData = table.row($(this).parents('tr')).data();
         $("#editModal").modal('show');
         $("#editDubId").val(dubData._id);
         $("#editDubType").val(dubData.type);
         $("#editDubName").val(dubData.name);
 
-    }).on('click','.delBtn',function(){
+    }).on('click', '.delBtn', function () {
         var dubData = table.row($(this).parents('tr')).data();
         $.confirm({
-            content: '确认删除【 '+dubData.name+' 】吗？',
+            content: '确认删除【 ' + dubData.name + ' 】吗？',
             buttons: {
                 'confirmDelBtn': {
                     text: '删除',
                     btnClass: 'btn-red',
-                    action: function(){
+                    action: function () {
                         delDub(dubData);
                     }
                 },
@@ -129,31 +132,31 @@ $(document).ready(function () {
                 }
             }
         });
-    }).on('click','.downloadBtn',function(){
+    }).on('click', '.downloadBtn', function () {
 
     });
-    
+
     function delDub(dubData) {
         $.ajax({
             url: '/api/delete',
             type: 'POST',
             data: dubData,
             cache: false,
-            success: function(data){
-                if(!data.success){
+            success: function (data) {
+                if (!data.success) {
                     $.alert("删除失败");
-                }else{
-                    table.ajax.reload( null, true );
+                } else {
+                    table.ajax.reload(null, true);
                     $.alert("删除成功");
                 }
             },
-            error: function(){
+            error: function () {
                 $.alert("与服务器通信发生错误");
             }
         });
     }
-    
-    $("#saveEditBtn").click(function(){
+
+    $("#saveEditBtn").click(function () {
         var editData = {
             _id: $("#editDubId").val(),
             type: $("#editDubType").val(),
@@ -162,22 +165,22 @@ $(document).ready(function () {
         updateDub(editData);
     });
 
-    function updateDub(dubDate){
+    function updateDub(dubDate) {
         $.ajax({
             url: '/api/update',
             type: 'POST',
             data: dubDate,
             cache: false,
-            success: function(data){
-                if(!data.success){
+            success: function (data) {
+                if (!data.success) {
                     $.alert("更新失败");
-                }else{
+                } else {
                     $.alert("更新成功");
-                    table.ajax.reload( null, true );
+                    table.ajax.reload(null, true);
                     $("#editModal").modal('hide');
                 }
             },
-            error: function(){
+            error: function () {
                 $.alert("与服务器通信发生错误");
             }
         });
@@ -187,30 +190,30 @@ $(document).ready(function () {
 
     });
 
-    $("#saveBtn").click(function(){
-        var dubDate ={
-            type:$("#dubType").val(),
-            name:$("#dubName").val(),
-            url:$("#dubUrl").text()
+    $("#saveBtn").click(function () {
+        var dubDate = {
+            type: $("#dubType").val(),
+            name: $("#dubName").val(),
+            url: $("#dubUrl").text()
         };
         saveData(dubDate);
     });
 
-    function saveData(dubDate){
+    function saveData(dubDate) {
         $.ajax({
             url: '/api/create',
             type: 'POST',
             data: dubDate,
             cache: false,
-            success: function(data){
-                if(!data.success){
+            success: function (data) {
+                if (!data.success) {
                     $.alert("存储信息不全，请检查");
-                }else{
-                    table.ajax.reload( null, true );
+                } else {
+                    table.ajax.reload(null, true);
                     $.alert("保存成功");
                 }
             },
-            error: function(){
+            error: function () {
                 $.alert("与服务器通信发生错误");
             }
         });
