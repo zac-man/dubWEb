@@ -26,7 +26,8 @@ $(document).ready(function () {
         //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
     }
 
-    var selectOption = ['专题配音', '广告配音', '飞碟说配音', '游戏配音'];
+    var selectOption = ['专题配音', '广告配音', '飞碟说配音', '游戏配音'
+        ,'英语配音','粤语配音','模仿配音','独白配音','地方配音'];
     init();
     function init() {
         $.each(selectOption, function (i, value) {
