@@ -3,7 +3,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var dubModel = require('./../database/models');
+var dubModel = require('../database/dubModels');
+var checkedModel = require('../database/chekedcModels');
 
 
 // 默认登录页面
@@ -18,7 +19,8 @@ router.post('/create', function (req, res, next) {
         name: req.body.name,
         type: req.body.type,
         url: req.body.url,
-        createTime: Date.now()
+        createTime: Date.now(),
+        checked: false
     };
     if (dubData.name == '' || dubData.type == '' || dubData.url == '') {
         res.status(200).json({success: false});
@@ -78,6 +80,50 @@ router.get('/dubAll', function (req, res, next) {
         res.status(200).json(reqMsg);
     });
 
+});
+
+/**
+ * 改变状态
+ */
+router.post('/updateChecked', function (req, res, next) {
+    var _id = req.body._id;
+    var checked = req.body.checked;
+
+    dubModel.updateCheckedBy_id(_id, checked, function (err) {
+        res.status(200).json({success: true});
+    });
+
+});
+
+router.get('/addList', function (req, res, next) {
+    var checkedList ={
+        list: '专题配音'
+    };
+    checkedModel.findAll(function (err, doc) {
+        if(doc.length >= 1){
+            res.status(200).json({success:false});
+        }else{
+            checkedModel.save(checkedList, function (err, doc) {
+                var reqMsg = {
+                    status: 200,
+                    data: doc,
+                    success: true
+                };
+                res.status(200).json(reqMsg);
+            });
+        }
+    });
+
+});
+router.get('/findCheckedList', function (req, res, next) {
+    checkedModel.findAll(function (err, doc) {
+        var reqMsg = {
+            status: 200,
+            data: doc,
+            success: true
+        };
+        res.status(200).json(reqMsg);
+    })
 });
 
 module.exports = router;

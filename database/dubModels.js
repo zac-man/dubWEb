@@ -5,12 +5,15 @@ var dubSchema = new Schema({
     name: String,
     type: String,
     url: String,
-    createTime: String
+    createTime: String,
+    checked: Boolean
 });
 
 
 var dubSchema = mongodb.mongoose.model("dubs", dubSchema);
-var dubDao = function () {};
+var dubDao = function () {
+};
+
 
 /*******
  保存
@@ -22,6 +25,7 @@ dubDao.prototype.save = function (obj, callback) {
     })
 };
 
+
 /**
  *  查询所有的数据
  */
@@ -30,6 +34,7 @@ dubDao.prototype.findAll = function (callback) {
         callback(err, obj);
     })
 };
+
 
 /**
  *  更新数据
@@ -49,5 +54,13 @@ dubDao.prototype.deleteBy_id = function (_id, callback) {
         callback(err);
     });
 };
+/**
+ * 改变状态
+ */
 
+dubDao.prototype.updateCheckedBy_id = function (_id, checked, callback) {
+    dubSchema.update({_id: _id}, {checked: checked}, function (err) {
+        callback(err);
+    });
+};
 module.exports = new dubDao();

@@ -26,8 +26,11 @@ $(document).ready(function () {
         //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
     }
 
-    var selectOption = ['专题配音', '广告配音', '飞碟说配音', '游戏配音'
-        ,'英语配音','粤语配音','模仿配音','独白配音','地方配音'];
+
+    var selectOption = ["专题配音", "宣传片配音", "广告配音",
+        "飞碟说配音", "英语配音", "纪录片配音", "游戏配音",
+        "模仿配音", "独白配音", "童声配音", "方言配音",
+        "角色配音", "粤语配音", "各国语言"];
     init();
     function init() {
         $.each(selectOption, function (i, value) {
@@ -58,7 +61,15 @@ $(document).ready(function () {
             {
                 "searchable": false,
                 "orderable": false,
-                "targets": 0
+                "targets": 0,
+                render: function (data, type, row, meta) {
+                    var checkbox ='';
+                    checkbox = "<input type='checkbox' class='dubItem' data-set='"+data._id+"'/>";
+                    if(data.checked){
+                        checkbox = "<input type='checkbox' class='dubItem' data-set='"+data._id+"' checked/>";
+                    }
+                    return checkbox;
+                }
             },
             {
                 "searchable": false,
@@ -98,15 +109,15 @@ $(document).ready(function () {
             //$(".audioEle").audioPlayer();
         }
     });
-    table.on('order.dt search.dt',
-        function () {
-            table.column(0, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+    /*    table.on('order.dt search.dt',
+     function () {
+     table.column(0, {
+     search: 'applied',
+     order: 'applied'
+     }).nodes().each(function (cell, i) {
+     cell.innerHTML = i + 1;
+     });
+     }).draw();*/
 
     table.on('click', '.editBtn', function () {
         var dubData = table.row($(this).parents('tr')).data();
@@ -135,7 +146,38 @@ $(document).ready(function () {
         });
     }).on('click', '.downloadBtn', function () {
 
+    }).on('click', '.dubItem', function () {
+        var dubData = table.row($(this).parents('tr')).data();
+        var checked = $(this).is(':checked');
+        changeStatus(dubData._id,checked);
+
     });
+
+    function changeStatus(_id,checked){
+        console.log(_id);
+        console.log(checked);
+        $.ajax({
+            url: '/api/updateChecked',
+            type: 'POST',
+            data: {
+                _id:_id,
+                checked:checked
+            },
+            cache: false,
+            success: function (data) {
+                if (!data.success) {
+                    $.alert("更新失败");
+                } else {
+                    $.alert("更新成功");
+                    table.ajax.reload(null, true);
+                    $("#editModal").modal('hide');
+                }
+            },
+            error: function () {
+                $.alert("与服务器通信发生错误");
+            }
+        });
+    }
 
     function delDub(dubData) {
         $.ajax({
