@@ -19,9 +19,6 @@ var checkedDao = function () {
 
 checkedDao.prototype.save = function (obj, callback) {
     var instance = new checkedSchema(obj);
-    console.log("--------");
-    console.log(obj);
-    console.log("--------");
     instance.save(function (err, doc) {
         callback(err, doc);
     })

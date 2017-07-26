@@ -37,7 +37,23 @@ $(document).ready(function () {
             var option = '<option value="' + value + '">' + value + '</option>';
             $("#dubType").append(option);
             $("#editDubType").append(option);
+            $("#checkboxList").append(drawLableInput(value));
         });
+        getCheckList();
+
+        $(".typeChecked").click(function(){
+            var tempArr = geTypeListChecked();
+            console.log(tempArr);
+        });
+        function geTypeListChecked(){
+           var tempArr = [];
+            $(".typeChecked").each(function() {
+                if ($(this).is(':checked')) {
+                    tempArr.push($(this).val());
+                }
+            });
+            return tempArr;
+        }
     }
 
 
@@ -63,10 +79,10 @@ $(document).ready(function () {
                 "orderable": false,
                 "targets": 0,
                 render: function (data, type, row, meta) {
-                    var checkbox ='';
-                    checkbox = "<input type='checkbox' class='dubItem' data-set='"+data._id+"'/>";
-                    if(data.checked){
-                        checkbox = "<input type='checkbox' class='dubItem' data-set='"+data._id+"' checked/>";
+                    var checkbox = '';
+                    checkbox = "<input type='checkbox' class='dubItem' data-set='" + data._id + "'/>";
+                    if (data.checked) {
+                        checkbox = "<input type='checkbox' class='dubItem' data-set='" + data._id + "' checked/>";
                     }
                     return checkbox;
                 }
@@ -149,19 +165,17 @@ $(document).ready(function () {
     }).on('click', '.dubItem', function () {
         var dubData = table.row($(this).parents('tr')).data();
         var checked = $(this).is(':checked');
-        changeStatus(dubData._id,checked);
+        changeStatus(dubData._id, checked);
 
     });
 
-    function changeStatus(_id,checked){
-        console.log(_id);
-        console.log(checked);
+    function changeStatus(_id, checked) {
         $.ajax({
             url: '/api/updateChecked',
             type: 'POST',
             data: {
-                _id:_id,
-                checked:checked
+                _id: _id,
+                checked: checked
             },
             cache: false,
             success: function (data) {
@@ -261,5 +275,36 @@ $(document).ready(function () {
             }
         });
     }
+    var checklist_id = '';
+    function getCheckList() {
+
+        $.ajax({
+            url: '/api/findCheckedList',
+            type: 'GET',
+            cache: false,
+            success: function (res) {
+                drawCheckBoxList(res.data[0]);
+                checklist_id = res.data[0].id;
+            },
+            error: function () {
+                $.alert("与服务器通信发生错误");
+            }
+        });
+    }
+
+    function drawCheckBoxList(data) {
+        var list = data.list.split(",");
+        $.each(list,function (index,item) {
+            $(".typeChecked[value='"+item+"']").prop("checked", true);
+        });
+    }
+
+    function drawLableInput(name) {
+        var checkboxStr = '<label class="checkbox-inline">';
+        checkboxStr += '<input type="checkbox" class="typeChecked" name="typeChecked" value="' + name + '" />' + name;
+        checkboxStr += '</label>';
+        return checkboxStr;
+    }
+
 
 });

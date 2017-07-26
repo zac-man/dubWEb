@@ -94,7 +94,9 @@ router.post('/updateChecked', function (req, res, next) {
     });
 
 });
-
+/**
+ * 添加一条checklist 记录
+ */
 router.get('/addList', function (req, res, next) {
     var checkedList ={
         list: '专题配音'
@@ -115,6 +117,9 @@ router.get('/addList', function (req, res, next) {
     });
 
 });
+/**
+ *  找到添加的那一条记录
+ */
 router.get('/findCheckedList', function (req, res, next) {
     checkedModel.findAll(function (err, doc) {
         var reqMsg = {
