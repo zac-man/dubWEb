@@ -21,7 +21,7 @@ router.get('/about', function (req, res, next) {
     res.render('dub/about', {title: 'Express'});
 });
 /**
- * 业务范畴
+ * 业务范围
  */
 router.get('/business', function (req, res, next) {
     res.render('dub/business', {title: 'Express'});
