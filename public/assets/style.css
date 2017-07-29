@@ -1,9 +1,11 @@
 * {
 
 }
-body{
+
+body {
 
 }
+
 .col-width-1170 {
     width: 1170px;
     margin: 0 auto;
@@ -82,45 +84,81 @@ ul > .active {
     line-height: 32px;
     padding: 5px 20px;
 }
-.content-span-about{
+
+.content-span-about {
     margin-bottom: 0px !important;
     padding-bottom: 5px !important;
     line-height: 26px;
 
 }
-.margin-top-50{
+
+.margin-top-50 {
     margin-top: 50px;
 }
-.margin-bottom-50{
+
+.margin-bottom-50 {
     margin-bottom: 50px;
 }
-.margin-bottom-30{
+
+.margin-bottom-30 {
     margin-bottom: 30px;
 }
-.footer{
+
+.footer {
     width: 100%;
-/*    background-color: #737373;*/
+    /*    background-color: #737373;*/
     position: relative;
     float: left;
-    bottom:0px;
+    bottom: 0px;
     margin-top: 10px;
 }
-.foot-img-div{
+
+.foot-img-div {
     float: right;
 }
-.foot-img{
-    height:200px;
+
+.foot-img {
+    height: 200px;
 }
-.footerContent{
+
+.footerContent {
     width: 100%;
     height: 80px;
     background-color: #626262;
     color: #bababa;
     text-align: right;
     margin-top: 150px;
-    padding-left:100px;
+    padding-left: 100px;
     padding-top: 16px;
 }
-.foot-p{
+
+.foot-p {
     line-height: 20px;
+}
+
+.banner-content {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+}
+
+.banner-content-2 {
+    position: absolute;
+    top: 20%;
+    left: 55%;
+}
+
+.banner-content p {
+    color: #0f0f0f;
+    font-size: 18px;
+}
+
+.banner-content-2 p {
+    color: #0f0f0f;
+}
+
+.banner-btn {
+    width: 100px;
+    height: 50px;
+
 }
