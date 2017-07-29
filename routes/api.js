@@ -98,13 +98,13 @@ router.post('/updateChecked', function (req, res, next) {
  * 添加一条checklist 记录
  */
 router.get('/addList', function (req, res, next) {
-    var checkedList ={
+    var checkedList = {
         list: '专题配音'
     };
     checkedModel.findAll(function (err, doc) {
-        if(doc.length >= 1){
-            res.status(200).json({success:false});
-        }else{
+        if (doc.length >= 1) {
+            res.status(200).json({success: false});
+        } else {
             checkedModel.save(checkedList, function (err, doc) {
                 var reqMsg = {
                     status: 200,
@@ -129,6 +129,19 @@ router.get('/findCheckedList', function (req, res, next) {
         };
         res.status(200).json(reqMsg);
     })
+});
+
+/**
+ *  更新checkList
+ */
+router.post('/updateCheckedList', function (req, res, next) {
+    var _id = req.body._id;
+    var checkList = req.body.checkList;
+
+    checkedModel.updateBy_id(_id, checkList, function (err) {
+        res.status(200).json({success: true});
+    });
+
 });
 
 module.exports = router;

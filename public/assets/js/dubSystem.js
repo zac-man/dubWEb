@@ -2,6 +2,7 @@
  * Created by manjh on 2017/7/13.
  */
 $(document).ready(function () {
+    var checklist_id = '';
     var options = {
         beforeSubmit: showRequest,  // pre-submit callback
         success: showResponse  // post-submit callback
@@ -42,8 +43,9 @@ $(document).ready(function () {
         getCheckList();
 
         $(".typeChecked").click(function(){
-            var tempArr = geTypeListChecked();
-            console.log(tempArr);
+            var tempArr = geTypeListChecked().join(",");
+            updateTypeCheckList(tempArr)
+
         });
         function geTypeListChecked(){
            var tempArr = [];
@@ -53,6 +55,33 @@ $(document).ready(function () {
                 }
             });
             return tempArr;
+        }
+        function updateTypeCheckList(checkList){
+            console.log(checkList);
+            console.log(checklist_id);
+            console.log(checkList);
+            $.ajax({
+                url: '/api/updateCheckedList',
+                type: 'POST',
+                data: {
+                    _id: checklist_id,
+                    checkList: checkList
+                },
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    /*if (!data.success) {
+                        $.alert("更新失败");
+                    } else {
+                        $.alert("更新成功");
+                        table.ajax.reload(null, true);
+                        $("#editModal").modal('hide');
+                    }*/
+                },
+                error: function () {
+                    $.alert("与服务器通信发生错误");
+                }
+            });
         }
     }
 
@@ -275,7 +304,7 @@ $(document).ready(function () {
             }
         });
     }
-    var checklist_id = '';
+
     function getCheckList() {
 
         $.ajax({
@@ -284,7 +313,9 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 drawCheckBoxList(res.data[0]);
-                checklist_id = res.data[0].id;
+                console.log(res.data[0]._id);
+
+                checklist_id = res.data[0]._id;
             },
             error: function () {
                 $.alert("与服务器通信发生错误");

@@ -2,7 +2,6 @@ var mongodb = require('./mongodb');
 var Schema = mongodb.mongoose.Schema;
 
 
-
 var checkedSchema = new Schema({
     list: String
 });
@@ -39,6 +38,11 @@ checkedDao.prototype.findAll = function (callback) {
  *  更新数据
  */
 
+checkedDao.prototype.updateBy_id = function (_id, str, callback) {
+    checkedSchema.update({_id: _id}, {list: str}, function (err, obj) {
+        callback(err, obj);
+    });
+};
 
 /**
  * 删除
