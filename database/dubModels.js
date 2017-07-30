@@ -38,9 +38,9 @@ dubDao.prototype.findAll = function (callback) {
  * 根据类型查询
  */
 dubDao.prototype.findOneByType = function (type,callback) {
-    dubSchema.find({type:type},function (err, obj) {
-        callback(err, obj);
-    })
+    dubSchema.find({type: {$in:type}}, function (err, obj) {
+        callback(err, obj, type);
+    });
 };
 
 /**

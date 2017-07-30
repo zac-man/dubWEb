@@ -4,21 +4,17 @@
 
 
 $(document).ready(function () {
-    //$("#tabsList").append();
+
     getCheckList();
 
     function getCheckList() {
-        var tabLists =[];
+        var tabLists = [];
 
         $.ajax({
             url: '/api/findCheckedList',
             type: 'GET',
             success: function (res) {
-
-                console.log(res);
-                //tabLists= res.data[0].list.split(",");
-                //drawTabs(tabLists);
-
+                drawTabs(res.data);
             },
             error: function () {
                 $.alert("与服务器通信发生错误");
@@ -26,29 +22,13 @@ $(document).ready(function () {
         })
     }
 
-    function getTypeData(i,type) {
-        var dubLists = [];
-        $.ajax({
-            url: '/api/findDubByType',
-            type: 'POST',
-            data:{
-                type:type
-            },
-            success: function (res) {
-                dubLists.push(res.data);
-                $("#dubList_"+i).append("--"+i);
-            },
-            error: function () {
-                $.alert("与服务器通信发生错误");
-            }
-        })
 
-    }
     function drawTabs(items) {
         $.each(items, function (i, item) {
-            $("#tabsList").append(drawTab(i, item));
+            $("#tabsList").append(drawTab(i, item.name));
             $("#tab-content").append(drawTabBody(i, item));
-        })
+        });
+        initListen();
     }
 
     function drawTab(i, tab) {
@@ -64,22 +44,27 @@ $(document).ready(function () {
     }
 
 
-
-    function drawTabBody(i, tab) {
+    function drawTabBody(i, tabData) {
         var str = "";
         if (i == 0) {
-            str = "<div class='tab-pane active fade in' data-set='" + tab + "' data-class='#dubList_" + i + "' id='#dubList_" + i + "'>";
+            str = "<div class='tab-pane active fade in' data-set='" + tabData.name + "' data-class='#dubList_" + i + "' id='#dubList_" + i + "'>";
         } else {
-            str = "<div class='tab-pane  fade in' data-set='" + tab + "' data-class='#dubList_" + i + "' id='#dubList_" + i + "'>";
+            str = "<div class='tab-pane  fade in' data-set='" + tabData.name + "' data-class='#dubList_" + i + "' id='#dubList_" + i + "'>";
         }
-        str += '';
+        str += drawDubListBody(tabData);
         str += "</div>";
         return str;
     }
 
-    function drawDubListBody(type) {
+    function drawDubListBody(tabData) {
+        $.each(tabData.data, function (i, item) {
+            drawTabBodyELe(item);
+        });
+        return tabData.name;
+    }
 
-        return type;
+    function drawTabBodyELe(data) {
+        console.log(data);
     }
 
     function initListen() {

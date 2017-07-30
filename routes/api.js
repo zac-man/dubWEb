@@ -138,10 +138,24 @@ router.get('/addList', function (req, res, next) {
  *  找到添加的那一条记录
  */
 router.get('/findCheckedList', function (req, res, next) {
-    checkedModel.findAllSplitType(function (err, doc) {
+    checkedModel.findAllSplitType(function (err, type, doc) {
+
+        var reqArr = [];
+        for (var i = 0; i < type.length; i++) {
+            var temp = {
+                name: type[i],
+                data: []
+            };
+            for (var j = 0; j < doc.length; j++) {
+                if (doc[j].type == temp.name) {
+                    temp.data.push(doc[j]);
+                }
+            }
+            reqArr.push(temp);
+        }
         var reqMsg = {
             status: 200,
-            data: doc,
+            data: reqArr,
             success: true
         };
         res.status(200).json(reqMsg);
