@@ -60,7 +60,7 @@ $(document).ready(function () {
         $.each(tabData.data, function (i, item) {
             drawTabBodyELe(item);
         });
-        return tabData.name;
+        return tabData.name ;
     }
 
     function drawTabBodyELe(data) {
