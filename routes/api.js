@@ -87,8 +87,7 @@ router.get('/dubAll', function (req, res, next) {
  */
 router.post('/findDubByType', function (req, res, next) {
     var type = req.body.type;
-    console.log(type);
-    dubModel.findOneByType(type,function (err, doc) {
+    dubModel.findOneByType(type, function (err, doc) {
         var reqMsg = {
             status: 200,
             data: doc,
@@ -139,7 +138,7 @@ router.get('/addList', function (req, res, next) {
  *  找到添加的那一条记录
  */
 router.get('/findCheckedList', function (req, res, next) {
-    checkedModel.findAll(function (err, doc) {
+    checkedModel.findAllSplitType(function (err, doc) {
         var reqMsg = {
             status: 200,
             data: doc,

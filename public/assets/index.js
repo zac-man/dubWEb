@@ -6,29 +6,44 @@
 $(document).ready(function () {
     //$("#tabsList").append();
     getCheckList();
+
     function getCheckList() {
+        var tabLists =[];
+
         $.ajax({
             url: '/api/findCheckedList',
             type: 'GET',
             success: function (res) {
-                var tabLists = res.data[0].list.split(",");
-                drawTabs(tabLists);
-                initListen();
+
+                console.log(res);
+                //tabLists= res.data[0].list.split(",");
+                //drawTabs(tabLists);
+
             },
             error: function () {
                 $.alert("与服务器通信发生错误");
             }
-        });
+        })
     }
 
-    /***
-     *
-     *
-     li ng-class="{true: 'active', false: ' '}[$index == 0]" ng-repeat="tab in tabList">
-     <a href="#dubList_{{$index}}" data-toggle='tab' aria-expanded='false'>{{tab}}</a>
-     </li>
-     * @param items
-     */
+    function getTypeData(i,type) {
+        var dubLists = [];
+        $.ajax({
+            url: '/api/findDubByType',
+            type: 'POST',
+            data:{
+                type:type
+            },
+            success: function (res) {
+                dubLists.push(res.data);
+                $("#dubList_"+i).append("--"+i);
+            },
+            error: function () {
+                $.alert("与服务器通信发生错误");
+            }
+        })
+
+    }
     function drawTabs(items) {
         $.each(items, function (i, item) {
             $("#tabsList").append(drawTab(i, item));
@@ -57,25 +72,12 @@ $(document).ready(function () {
         } else {
             str = "<div class='tab-pane  fade in' data-set='" + tab + "' data-class='#dubList_" + i + "' id='#dubList_" + i + "'>";
         }
-        str += drawDubListBody(tab);
+        str += '';
         str += "</div>";
         return str;
     }
 
     function drawDubListBody(type) {
-        $.ajax({
-            url: '/api/findDubByType',
-            type: 'POST',
-            data:{
-                type:type
-            },
-            success: function (res) {
-               console.log(res);
-            },
-            error: function () {
-                $.alert("与服务器通信发生错误");
-            }
-        });
 
         return type;
     }
