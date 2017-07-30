@@ -83,6 +83,24 @@ router.get('/dubAll', function (req, res, next) {
 });
 
 /**
+ *  根据类型 获得数据
+ */
+router.post('/findDubByType', function (req, res, next) {
+    var type = req.body.type;
+    console.log(type);
+    dubModel.findOneByType(type,function (err, doc) {
+        var reqMsg = {
+            status: 200,
+            data: doc,
+            success: true
+        };
+        res.status(200).json(reqMsg);
+    });
+
+});
+
+
+/**
  * 改变状态
  */
 router.post('/updateChecked', function (req, res, next) {

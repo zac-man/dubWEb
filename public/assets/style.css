@@ -149,16 +149,54 @@ ul > .active {
 }
 
 .banner-content p {
-    color: #0f0f0f;
+    color: #4312ae;
     font-size: 18px;
 }
 
 .banner-content-2 p {
-    color: #0f0f0f;
+    color: #2f2f2f;
 }
 
 .banner-btn {
-    width: 100px;
-    height: 50px;
+    border: 1px solid #4312ae;
+    color: #4312ae;
+    font-size: 16px;
+    text-align: center;
+    padding: 8px 0px;
+    width: 130px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
 
+.banner-btn:hover {
+    border: 1px solid #280671;
+    background-color: #4312ae;
+    color: #fff;
+}
+
+.banner-btn-2 {
+    border: 1px solid #2f2f2f;
+    color: #2f2f2f;
+}
+
+.banner-btn-2:hover {
+    border: 1px solid #646464;
+    background-color: #646464;
+    color: #fff;
+}
+.dubTabList{
+    min-width: 80px;
+    background-color: #e9f01d;
+    float: left;
+    text-align: center;
+    padding: 6px 10px;
+    font-size: 16px;
+    color: #2f2f2f;
+}
+.tabActive{
+    background-color: yellow;
+    color: #0c0c0c;
+}
+.dubTabList:hover{
+    background-color: yellow;
 }

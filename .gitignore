@@ -1,3 +1,4 @@
 .idea
 /public/upload
+/public/bower_component
 /node_modules

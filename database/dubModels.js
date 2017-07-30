@@ -34,7 +34,14 @@ dubDao.prototype.findAll = function (callback) {
         callback(err, obj);
     })
 };
-
+/**
+ * 根据类型查询
+ */
+dubDao.prototype.findOneByType = function (type,callback) {
+    dubSchema.find({type:type},function (err, obj) {
+        callback(err, obj);
+    })
+};
 
 /**
  *  更新数据
