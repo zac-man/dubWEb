@@ -57,14 +57,19 @@ $(document).ready(function () {
     }
 
     function drawDubListBody(tabData) {
+        var temp = '';
         $.each(tabData.data, function (i, item) {
-            drawTabBodyELe(item);
+            temp += drawTabBodyELe(item);
         });
-        return tabData.name ;
+        return temp;
     }
 
     function drawTabBodyELe(data) {
         console.log(data);
+        var tempStr = '<div class="col-md-4 no-padding">';
+        tempStr += '<div class="dubItem">' + data.name + '<i class="fa fa-play pull-right fa-radio"></i></div>';
+        tempStr += '</div>';
+        return tempStr;
     }
 
     function initListen() {
@@ -72,7 +77,11 @@ $(document).ready(function () {
             var nowHref = $(this).attr("href");
             $("#tab-content").find(".active").removeClass("active");
             $("#tab-content").find('[data-class=' + nowHref + ']').addClass("active");
-        })
+        });
+
+        $(".dubItem").click(function () {
+
+        });
     }
 
 });

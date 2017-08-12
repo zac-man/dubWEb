@@ -200,3 +200,21 @@ ul > .active {
 .dubTabList:hover{
     background-color: yellow;
 }
+.no-padding{
+    padding: 0px;
+}
+.fa-radio{
+    font-size: 16px;
+    line-height: 40px;
+}
+.dubItem{
+    height:40px;
+    line-height: 40px;
+    padding: 0px 25px;
+    background-color: #dddddd;
+    border: 1px #009be3 solid;
+    box-sizing: content-box;
+}
+.dubItem:hover{
+    background-color: #d9edf7;
+}
