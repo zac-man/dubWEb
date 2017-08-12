@@ -42,10 +42,11 @@ $(document).ready(function () {
                 "orderable": false,
                 targets: 3,
                 render: function (data, type, row, meta) {
-                    return '<audio class="audioEle" src="/upload/' + data.url + '" preload="auto" controls loop>'
+                    /*return '<audio class="audioEle" src="/upload/' + data.url + '" preload="auto" controls loop>'
                         + window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') +
                         '/upload/' + data.url + '' +
-                        '</audio>';
+                        '</audio>';*/
+                    return  '<audio class="audioEle" src="/upload/'+data.url+'" preload="auto" controls loop></audio>';
                 }
             },
             {
@@ -64,7 +65,7 @@ $(document).ready(function () {
         "fnPreDrawCallback": function (oSettings) {
         },
         "initComplete": function (settings, json) {
-            //$(".audioEle").audioPlayer();
+            $(".audioEle").audioPlayer();
         }
     });
     table.on('order.dt search.dt',
