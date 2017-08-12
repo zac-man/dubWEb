@@ -5,13 +5,16 @@ $(function() {
     $(".btn_top").hide();
     $(".btn_top").on("click",function(){
         $('html, body').animate({scrollTop: 0},300);return false;
-    })
+    });
     $(window).bind('scroll resize',function(){
         if($(window).scrollTop()<=300){
             $(".btn_top").hide();
         }else{
             $(".btn_top").show();
         }
+    });
+    $('.carousel').carousel({
+        interval: 2000
     })
 });
 var flag=1;
@@ -28,4 +31,5 @@ $('#rightArrow').click(function(){
         flag=1;
     }
 });
+
 

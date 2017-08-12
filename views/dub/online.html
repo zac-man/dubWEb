@@ -7,6 +7,7 @@
     <title>滕州百灵文化传媒有限公司</title>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" media="screen">
+    <link rel="stylesheet" href="/bower_components/DataTables/media/css/jquery.dataTables.min.css" media="screen">
     <link href="/assets/kefu/css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/style.css" media="screen">
 
@@ -28,23 +29,95 @@
         </div>
     </div>
 </div>
-
-<div class="col-width-1170">
-    <div class="col-md-12">
-        <p class="content-header">关于我们online：</p>
-        <p class="content-span">
-            <b>滕州百灵文化传媒有限公司是</b>
-            一家面向全国以互联网为平台的专业配音服务机构，
-            我们的制作团体遍布全国，旗下拥有国内上百位优秀专业配音人员，能满足不同客户的各种需求。
-            拥有专业的录音棚，由拥有专业声学经验的录音师建声，并全程监督录音棚建设。得到了业内人士一致好评与认可!
-        </p>
+<div class="bannerDiv">
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="/imgs/banner/b1.png" alt="店鋪地址">
+                <div class="banner-content">
+                    <p>一流的配音师</p>
+                    <p>一流的录音设备</p>
+                    <p>一流的售后服务</p>
+                    <p style="margin-bottom: 40px;">只为给您打造满意的声音</p>
+                    <a target="_blank"
+                       href="https://shop150130081.taobao.com/shop/view_shop.htm?tracelog=twddp&user_number_id=2818166572&user_id=2818166572"
+                       class="banner-btn">
+                        立即咨询
+                    </a>
+                </div>
+            </div>
+            <div class="item">
+                <img src="/imgs/banner/b2.png" alt="Second slide">
+                <div class="banner-content banner-content-2">
+                    <p>众多专业化的配音师</p>
+                    <p>量身定制的专业声源</p>
+                    <p>拒绝平庸、模式化的声音</p>
+                    <p style="margin-bottom: 40px;">满足多元化的声音需求</p>
+                    <a class="banner-btn banner-btn-2" href="/online">
+                        立即试听
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" style="line-height: 300px;font-size: 100px;" href="#myCarousel"
+           data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" style="line-height: 300px;font-size: 100px;" href="#myCarousel"
+           data-slide="next">&rsaquo;</a>
     </div>
-    <div class="col-md-12 margin-top-50">
-        <p class="content-header">主推样音：</p>
+</div>
+<div class="col-width-1170">
+
+    <div class="col-md-12 margin-top-50 margin-bottom-30">
+        <p class="content-header">我们的作品：</p>
+    </div>
+    <div class="col-ms-12">
+        <div class="text-align-right">
+            <div class="form-group">
+                <input type="text" class="form-control input-smf filter pull-right" style="width: 300px;margin-bottom: 5px;" data-index="1"
+                       placeholder="按样音名搜索" id="dubName"/>
+                <select name="type" style="width: 150px;" class="form-control input-smf filter pull-right"
+                        data-index="2" id="dubType">
+                    <option value="">全部类型</option>
+                </select>
+            </div>
+        </div>
+        <div style="padding-left: 20px;margin-bottom:100px; ">
+            <table id="dubListTable"
+                   class="table table-striped table-bordered table-hover dataTable no-footer"
+                   width="100%" role="grid" aria-describedby="dt_basic_info"
+                   style="width: 100%;">
+                <thead>
+                <tr role="row">
+                    <th width="3%"></th>
+                    <th width="35%">样音名</th>
+                    <th width="10%">样音类型</th>
+                    <th width="30%">样音播放</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
 <div class="footer">
-
+    <div class="col-width-1170">
+        <div class="foot-img-div">
+            <img src="/imgs/music.png" class="foot-img">
+        </div>
+    </div>
+    <div class="footerContent">
+        <div class="col-width-1170">
+            <p class="foot-p">Copyright © 随风配音网All Rights Reserved </p>
+            <p class="foot-p">联系方式：17098187078 备案号：鲁ICP备15016566</p>
+        </div>
+    </div>
 </div>
 
 <!--qq聊天代码部分begin-->
@@ -80,7 +153,9 @@
 <!--qq聊天代码部分end-->
 <script src="/bower_components/jquery/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/DataTables/media/js/i18n.zh.js"></script>
 <script src="/assets/main.js"></script>
-
+<script src="/assets/online.js"></script>
 </body>
 </html>

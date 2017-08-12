@@ -209,9 +209,9 @@ $(document).ready(function () {
             cache: false,
             success: function (data) {
                 if (!data.success) {
-                    $.alert("更新失败");
+                   $.alert("更新失败");
                 } else {
-                    $.alert("更新成功");
+                    // $.alert("更新成功");
                     table.ajax.reload(null, true);
                     $("#editModal").modal('hide');
                 }

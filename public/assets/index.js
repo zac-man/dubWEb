@@ -73,13 +73,14 @@ $(document).ready(function () {
     function drawDubListBody(tabData) {
         var temp = '';
         $.each(tabData.data, function (i, item) {
-            temp += drawTabBodyELe(item);
+            if(item.checked){
+                temp += drawTabBodyELe(item);
+            }
         });
         return temp;
     }
 
     function drawTabBodyELe(data) {
-        console.log(data);
         var tempStr = '<div class="col-md-4 no-padding">';
         tempStr += '<div class="dubItem" dataUrl="' + data.url + '" dataName="' + data.name + '">' + data.name + '<i class="fa fa-play pull-right fa-radio"></i></div>';
         tempStr += '</div>';
@@ -104,8 +105,4 @@ $(document).ready(function () {
             }).jPlayer("play");
         });
     }
-    $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-    });
-
 });
