@@ -6,10 +6,24 @@
 $(document).ready(function () {
 
     getCheckList();
+    var jPlayer = $("#jquery_jplayer_1").jPlayer({
+        ready: function () {
+            $(this).jPlayer("setMedia", {
+                mp3: ""
+            });
+        },
+        swfPath: "../../dist/jplayer",
+        supplied: "mp3",
+        wmode: "window",
+        useStateClassSkin: true,
+        autoBlur: false,
+        smoothPlayBar: true,
+        keyEnabled: true,
+        remainingDuration: true,
+        toggleDuration: true
+    });
 
     function getCheckList() {
-        var tabLists = [];
-
         $.ajax({
             url: '/api/findCheckedList',
             type: 'GET',
@@ -67,7 +81,7 @@ $(document).ready(function () {
     function drawTabBodyELe(data) {
         console.log(data);
         var tempStr = '<div class="col-md-4 no-padding">';
-        tempStr += '<div class="dubItem">' + data.name + '<i class="fa fa-play pull-right fa-radio"></i></div>';
+        tempStr += '<div class="dubItem" dataUrl="' + data.url + '" dataName="' + data.name + '">' + data.name + '<i class="fa fa-play pull-right fa-radio"></i></div>';
         tempStr += '</div>';
         return tempStr;
     }
@@ -80,8 +94,18 @@ $(document).ready(function () {
         });
 
         $(".dubItem").click(function () {
-
+            var temp = {
+                title: $(this).attr("dataName"),
+                mp3: $(this).attr("dataUrl")
+            };
+            jPlayer.jPlayer("setMedia", {
+                title: temp.title,
+                mp3: '/upload/'+temp.mp3
+            }).jPlayer("play");
         });
     }
+    $(document).ready(function() {
+        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
+    });
 
 });

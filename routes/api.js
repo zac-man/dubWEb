@@ -137,6 +137,20 @@ router.get('/addList', function (req, res, next) {
 /**
  *  找到添加的那一条记录
  */
+
+router.get('/findDubTypeList', function (req, res, next) {
+    checkedModel.findAll(function (err, doc) {
+        var reqMsg = {
+            status: 200,
+            data: doc,
+            success: true
+        };
+        res.status(200).json(reqMsg);
+    });
+});
+/**
+ * 根据类型获得音频
+ */
 router.get('/findCheckedList', function (req, res, next) {
     checkedModel.findAllSplitType(function (err, type, doc) {
 

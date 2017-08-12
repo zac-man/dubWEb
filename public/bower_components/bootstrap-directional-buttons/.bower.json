@@ -1,0 +1,26 @@
+{
+  "name": "bootstrap-directional-buttons",
+  "version": "1.0.1",
+  "homepage": "https://github.com/westonganger/bootstrap-directional-buttons",
+  "author": "Weston Ganger",
+  "description": "Directional / arrow buttons for Bootstrap",
+  "main": "dist/bootstrap-directional-buttons.min.css",
+  "license": "MIT",
+  "keywords": [
+    "bootstrap",
+    "buttons",
+    "button",
+    "arrow",
+    "breadcrumbs",
+    "directional"
+  ],
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "6c4ea8d14b604a3a2af36e9a9b628cae9c0f2e29"
+  },
+  "_source": "https://github.com/westonganger/bootstrap-directional-buttons.git",
+  "_target": "*",
+  "_originalSource": "bootstrap-directional-buttons"
+}

@@ -308,13 +308,11 @@ $(document).ready(function () {
     function getCheckList() {
 
         $.ajax({
-            url: '/api/findCheckedList',
+            url: '/api/findDubTypeList',
             type: 'GET',
             cache: false,
             success: function (res) {
                 drawCheckBoxList(res.data[0]);
-                console.log(res.data[0]._id);
-
                 checklist_id = res.data[0]._id;
             },
             error: function () {
