@@ -46,7 +46,7 @@ $(document).ready(function () {
                         + window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') +
                         '/upload/' + data.url + '' +
                         '</audio>';*/
-                    return  '<audio class="audioEle" src="/upload/'+data.url+'" preload="auto" controls loop></audio>';
+                    return  '<audio class="audioEle" name="dubAudio" src="/upload/'+data.url+'" preload="auto" controls loop></audio>';
                 }
             },
             {
@@ -66,6 +66,20 @@ $(document).ready(function () {
         },
         "initComplete": function (settings, json) {
             $(".audioEle").audioPlayer();
+            $(".audioplayer-playpause").click(function(){
+                var that = $(this);
+                console.log(that);
+                console.log(that.closest("tbody").find(".audioplayer-playing"));
+                var a = that.closest("tbody").find(".audioplayer-playing");
+                    a.removeClass(".audioplayer-playing").addClass(".audioplayer-stopped");
+            /*    $(".audioEle").pause();
+                that.play();*/
+                var audio = document.getElementsByName('dubAudio');
+               // console.log(audio);
+                for(var i = 0; i<audio.length;i++){
+                    audio[i].pause();
+                }
+            });
         }
     });
     table.on('order.dt search.dt',

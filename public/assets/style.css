@@ -150,7 +150,8 @@ ul > .active {
 
 .banner-content p {
     color: #4312ae;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .banner-content-2 p {
@@ -163,6 +164,7 @@ ul > .active {
     font-size: 16px;
     text-align: center;
     padding: 12px 40px;
+    font-weight: 600;
     width: 130px;
     border-radius: 5px;
     text-decoration:none
