@@ -19,6 +19,7 @@
     "morgan": "~1.5.1",
     "multer": "latest",
     "serve-favicon": "~2.2.0",
+    "formidable": "latest",
     "serve-static": "latest"
   }
 }

@@ -17,7 +17,8 @@ router.post("/login",function(req,res){    // 到达 /logout 路径则登出， 
         status:200,
         success:true
     };
-    if(username == 'bailing' && password == 'zcd552288'){
+    if(username == 'admin' && password == '123'){
+    //if(username == 'bailing' && password == 'zcd552288'){
         req.session.user = req.body;
         reqMsg.success = true;
         res.status(reqMsg.status).json(reqMsg);
@@ -34,6 +35,14 @@ router.get('/system', function(req, res,next) {
         res.redirect("/admin");				//未登录则重定向到 /login 路径
     }
     res.render('system/system', { title: '系统管理' });
+});
+
+// 批量导入
+router.get('/upload', function(req, res,next) {
+    if(!req.session.user){ 					//到达/home路径首先判断是否已经登录
+        res.redirect("/admin");				//未登录则重定向到 /login 路径
+    }
+    res.render('system/upload', { title: '系统管理' });
 });
 // 登出
 router.get("/logout",function(req,res){    // 到达 /logout 路径则登出， session中user,error对象置空，并重定向到根路径
