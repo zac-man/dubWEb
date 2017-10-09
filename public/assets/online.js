@@ -13,7 +13,7 @@ $(document).ready(function () {
             "url": "/api/dubAll"
         },
         "bDestroy": true,
-        "iDisplayLength": 25,
+        "iDisplayLength": 15,
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
         },
@@ -25,7 +25,7 @@ $(document).ready(function () {
             {"data": "name"},
             {"data": "type"},
             {"data": null},
-            {"data": null},
+            {"data": null}
         ],
         columnDefs: [
             {
@@ -33,7 +33,6 @@ $(document).ready(function () {
                 "orderable": false,
                 "targets": 0,
                 render: function (data, type, row, meta) {
-
                     return "1";
                 }
             },
@@ -63,23 +62,28 @@ $(document).ready(function () {
         ],
         "order": [[1, 'asc']],
         "fnPreDrawCallback": function (oSettings) {
+            //$(".audioEle").audioPlayer();
+           // console.log("******************");
+
+            //console.log($(".audioEle"));
+
+            //console.log("******************");
         },
         "initComplete": function (settings, json) {
-            $(".audioEle").audioPlayer();
-            $(".audioplayer-playpause").click(function(){
+            //$(".audioEle").audioPlayer();
+            //console.log("------------");
+            //console.log($(".audioEle"));
+            //console.log($(".audioEle"));
+            //console.log("------------");
+           /* $(".audioplayer-playpause").click(function(){
                 var that = $(this);
-                console.log(that);
-                console.log(that.closest("tbody").find(".audioplayer-playing"));
                 var a = that.closest("tbody").find(".audioplayer-playing");
                     a.removeClass(".audioplayer-playing").addClass(".audioplayer-stopped");
-            /*    $(".audioEle").pause();
-                that.play();*/
                 var audio = document.getElementsByName('dubAudio');
-               // console.log(audio);
                 for(var i = 0; i<audio.length;i++){
                     audio[i].pause();
                 }
-            });
+            });*/
         }
     });
     table.on('order.dt search.dt',
@@ -91,6 +95,13 @@ $(document).ready(function () {
                 cell.innerHTML = i + 1;
             });
         }).draw();
+
+    table.on( 'draw', function () {
+        var that = $(".audioEle")[0];
+        if((typeof $(that).attr("style")) !== 'string'){
+            $(".audioEle").audioPlayer();
+        }
+    } );
 
     $("#dubType").change(function () {
         table
