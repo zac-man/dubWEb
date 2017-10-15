@@ -2,4 +2,4 @@
 /public/upload
 /public/bower_component
 /node_modules
-nohup.out
+/nohup.out
