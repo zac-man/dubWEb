@@ -5,15 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>滕州百灵文化传媒有限公司</title>
+    <link href="/assets/jplayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" media="screen">
-    <link rel="stylesheet" href="/bower_components/DataTables/media/css/jquery.dataTables.min.css" media="screen">
-    <link rel="stylesheet" href="/assets/audioplayer/css/audioplayer.css" media="screen">
     <link href="/assets/kefu/css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/style.css" media="screen">
-
     <link rel="shortcut icon" href="/imgs/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/imgs/favicon/favicon.ico" type="image/x-icon">
+    <style>
+        .jp-audio {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="col-width-1170">
@@ -74,36 +76,101 @@
     </div>
 </div>
 <div class="col-width-1170">
-
-    <div class="col-md-12 margin-top-50 margin-bottom-30">
-        <p class="content-header">我们的作品：</p>
+    <div class="row">
+        <div class="col-md-12 margin-top-50 margin-bottom-30">
+            <p class="content-header">我们的作品：</p>
+        </div>
     </div>
-    <div class="col-ms-12">
-        <div class="text-align-right">
-            <div class="form-group">
-                <input type="text" class="form-control input-smf filter pull-right" style="width: 300px;margin-bottom: 5px;" data-index="1"
-                       placeholder="按样音名搜索" id="dubName"/>
-                <select name="type" style="width: 150px;" class="form-control input-smf filter pull-right"
-                        data-index="2" id="dubType">
-                    <option value="">全部类型</option>
-                </select>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="col-md-12">
+
             </div>
         </div>
-        <div style="padding-left: 20px;margin-bottom:100px; ">
-            <table id="dubListTable"
-                   class="table table-striped table-bordered table-hover dataTable no-footer"
-                   width="100%" role="grid" aria-describedby="dt_basic_info"
-                   style="width: 100%;">
-                <thead>
-                <tr role="row">
-                    <th width="3%"></th>
-                    <th width="35%">样音名</th>
-                    <th width="10%">样音类型</th>
-                    <th width="30%">样音播放</th>
-                    <th width="10%">操作</th>
-                </tr>
-                </thead>
-            </table>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">样音类型</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group" id="listType">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                        <div class="jp-type-single">
+                            <div class="jp-gui jp-interface">
+                                <div class="jp-controls">
+                                    <button class="jp-play" role="button" tabindex="0">play</button>
+                                    <button class="jp-stop" role="button" tabindex="0">stop</button>
+                                </div>
+                                <div class="jp-progress">
+                                    <div class="jp-seek-bar">
+                                        <div class="jp-play-bar"></div>
+                                    </div>
+                                </div>
+                                <div class="jp-volume-controls">
+                                    <button class="jp-mute" role="button" tabindex="0">mute</button>
+                                    <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+                                    <div class="jp-volume-bar">
+                                        <div class="jp-volume-bar-value"></div>
+                                    </div>
+                                </div>
+                                <div class="jp-time-holder">
+                                    <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+                                    <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+                                </div>
+                            </div>
+                            <div class="jp-details">
+                                <div class="jp-title" aria-label="title">&nbsp;</div>
+                            </div>
+                            <div class="jp-no-solution">
+                                <span>Update Required</span>
+                                To play the media you will need to either update your browser to a recent version or update
+                                your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <div>
+                        <div class="pull-right" style="margin-bottom: 10px;">
+                            <button type="button" id="searchBtn" class="btn btn-info"><i class="glyphicon glyphicon-search"></i> 搜索</button>
+                        </div>
+                        <div class="col-sm-4 pull-right">
+                            <input type="text" class="form-control" id="dubName" placeholder="输入样音名查询">
+                        </div>
+                    </div>
+                    <table id="dubListTable" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th width="3%"></th>
+                                <th width="35%">样音名</th>
+                                <th width="10%">样音类型</th>
+                                <th width="10%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tBody"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <ul class="pull-right" id="page"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -154,9 +221,8 @@
 <!--qq聊天代码部分end-->
 <script src="/bower_components/jquery/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-<script src="/bower_components/DataTables/media/js/i18n.zh.js"></script>
-<script src="/assets/audioplayer/js/audioplayer.js"></script>
+<script type="text/javascript" src="/assets/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<script src="/assets/page/bootstrap-paginator.js"></script>
 <script src="/assets/main.js"></script>
 <script src="/assets/online.js"></script>
 </body>

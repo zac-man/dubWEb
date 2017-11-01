@@ -43,7 +43,6 @@ checkedDao.prototype.findAllSplitType = function (callback) {
     checkedSchema.find(function (err, obj) {
         var typeList = obj[0].list.split(",");
         dubModel.findOneByType(typeList, function (err, doc, type) {
-
             callback(err, type, doc);
         });
     })

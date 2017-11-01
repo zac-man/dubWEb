@@ -37,9 +37,45 @@ dubDao.prototype.findAll = function (callback) {
 /**
  * 根据类型查询
  */
-dubDao.prototype.findOneByType = function (type,callback) {
-    dubSchema.find({type: {$in:type}}, function (err, obj) {
+dubDao.prototype.findOneByType = function (type, callback) {
+    dubSchema.find({type: {$in: type}}, function (err, obj) {
         callback(err, obj, type);
+    });
+};
+
+/**
+ *  分页查询
+ */
+dubDao.prototype.findListHasPage = function (params, callback) {
+    var page = parseInt(params.pageNo);
+    var rows = parseInt(params.pageSize);
+
+    var query = dubSchema.find({});
+    var skipNum = (page - 1) * rows;
+    if (params.type !== '') {
+        query.where('type', params.type)
+    }
+    if (params.name !== '') {
+        var nameRe = new RegExp(params.name);
+        query.where('name', nameRe)
+    }
+    query.skip(skipNum).limit(rows).exec('find', function (err, items) {
+        if (err) {
+            callback(err, items);
+        } else {
+            //计算数据总数
+            var query2 = dubSchema.find({});
+            if (params.type !== '') {
+                query2.where('type', params.type)
+            }
+            if (params.name !== '') {
+                var nameRe = new RegExp(params.name);
+                query2.where('name', nameRe)
+            }
+            query2.exec('find', function (err, result) {
+                callback(err, items, result.length);
+            });
+        }
     });
 };
 

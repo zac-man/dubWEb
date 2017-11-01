@@ -175,6 +175,22 @@ router.get('/findCheckedList', function (req, res, next) {
         res.status(200).json(reqMsg);
     })
 });
+/**
+ * 分页查询
+ * dubListSearch
+ */
+router.post('/dubListSearch', function (req, res, next) {
+    var params = req.body;
+    dubModel.findListHasPage(params,function (err, doc,totalCount) {
+        var reqMsg = {
+            status: 200,
+            data: doc,
+            totalCount:totalCount,
+            success: true
+        };
+        res.status(200).json(reqMsg);
+    });
+});
 
 /**
  *  更新checkList

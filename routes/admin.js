@@ -17,8 +17,7 @@ router.post("/login",function(req,res){    // 到达 /logout 路径则登出， 
         status:200,
         success:true
     };
-    if(username == 'admin' && password == '123'){
-    //if(username == 'bailing' && password == 'zcd552288'){
+    if(username == 'bailing' && password == 'zcd552288'){
         req.session.user = req.body;
         reqMsg.success = true;
         res.status(reqMsg.status).json(reqMsg);
